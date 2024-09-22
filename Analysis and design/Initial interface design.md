@@ -3,7 +3,7 @@
 
 ## Home
 
-![home interface](../resources/images/Pasted%20image%20240922032606.png)
+![home interface](resources/images/Pasted%20image%20240922032606.png)
 
 ## Origin
 
