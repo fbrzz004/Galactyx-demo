@@ -1,7 +1,7 @@
 # Galactyx
 ---
 
-> Juego pixelart sobre exploración del espacio, galaxias, exoplanetas.
+> Pixelart game about space, exoplanets and exploration.
 
 
 	```|                                                                   ░                      |```
@@ -55,11 +55,11 @@
 	```|                                                                                          |```
 
 
-La humanidad ha destruido la Tierra ecológicamente y busca nuevos planetas para habitar. Eres uno de los encargados de limpiar los planetas y territorios de amenazas para la nave nodriza humana. Después de limpiar los planetas de un sistema solar, construirás una esfera Dyson alrededor de la estrella para utilizar su energía hasta que se haya generado energía suficiente para traer a la nave nodriza y la flota a colonizar la galaxia, y para que tú puedas buscar una nueva. Al tapar la luz solar, los nuevos planetas colonizados irán muriendo lentamente.
+Humanity has ecologically destroyed earth and is searching for new planets to inhabit. You are one of those responsible for clearing planets and territories of threats to the human mothership. After clearing the planets in a solar system, you will build a dyson sphere around the star to harness its energy until enough has been generated to bring the mothership and the fleet to colonize the galaxy, and for you to move on to search for a new one. By blocking the starlight, the newly colonized planets will slowly begin to die.
 
 
 
-Créditos:
+Credits:
 
 - André Román
 - Pedro Sota
@@ -74,4 +74,4 @@ Créditos:
 
 
 ---- * StarTracers * ----
--
+

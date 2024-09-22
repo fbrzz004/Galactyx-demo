@@ -1,22 +1,16 @@
 
-# Plan de proyecto
+# Project Management Document
 
-## Definición de roles
+## Role Definition
 
-- Jefe de desarrolladores: Pedro Sota
-- Desarrolladores:
+- Chief developer: Pedro Sota
+- Developers:
 
 	- Vilberto Patricio
 	- André Román
-	- Adrián PAlacios
+	- Adrián Palacios
 
-
-## Lista de tareas
-
-- [ ] Todo
-
-
-## Diagrama de Gantt
+## Gantt Diagram
 
 ```mermaid
 
@@ -38,7 +32,7 @@ gantt
     Implentación                                :b3, 2024-09-30, 3d
     
     section Sprint 4
-    Preparación de la demo                      :c1, 2024-10-03, 1d
+    Preparación de la demo                      :c1, 2024-10-03, 2d
     Revisión final                              :c2, 2024-10-05, 1d
 
 ```
