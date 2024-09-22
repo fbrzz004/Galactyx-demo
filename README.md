@@ -77,9 +77,7 @@ Then, run the following command in your terminal from the root directory of the 
 
 ```bash
 pip install -r requirements
-
-
-
+```
 
 ---- * StarTracers * ----
 
