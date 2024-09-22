@@ -69,6 +69,14 @@ Credits:
 
 
 
+## Installing Dependencies
+
+To install all the necessary dependencies for this project, make sure you have [Python](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installation/) installed on your system.
+
+Then, run the following command in your terminal from the root directory of the project:
+
+```bash
+pip install -r requirements
 
 
 
