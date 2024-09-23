@@ -1,9 +1,9 @@
-from ..home import Home as DefaultState
+from src.states.engine_state.states import navigation
 
 class EngineObserver:
     def __init__(self):
         self.__exit = False
-        self.__ui_class = DefaultState
+        self.__ui_class = navigation['home']
 
     @property
     def exit(self) -> bool:
@@ -18,6 +18,11 @@ class EngineObserver:
         self.__exit = value
 
     @ui_class.setter
-    def ui_class(self, value):
-        self.__ui_class = value
+    def ui_class(self, name_ui: str):
+        if name_ui in list(navigation.keys()):
+            self.__ui_class = navigation[name_ui]
+        else:
+            raise "Not found a ui class."
+
+
 

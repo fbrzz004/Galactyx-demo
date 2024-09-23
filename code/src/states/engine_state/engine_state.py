@@ -5,13 +5,17 @@ from pygame import init, quit
 
 class EngineState:
     def __init__(self):
-        self.__context = None
+        # instantiate a window with the size specified
         self.__screen_instance = Screen(size=(800, 600))
+        # instantiate observer for engine attributes
         self.__observer = EngineObserver()
+
         # initialize pygame's modules
         init()
+
     def exec(self):
         state = None
+
         while not self.__observer.exit:
 
             # remove objet from the previous interface if it's not None
