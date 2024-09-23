@@ -73,3 +73,13 @@ class ButtonGroup:
     def draw(self, screen_instance):
         for button in self.__buttons:
             button.draw(screen_instance)
+
+    def handle_events(self):
+        label_activate = None
+        index = 0
+
+        while not label_activate and index < len(self.__buttons):
+            label_activate = self.__buttons[index].handle_event()
+            index += 1
+
+        return label_activate
