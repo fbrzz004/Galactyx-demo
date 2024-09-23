@@ -1,5 +1,4 @@
-from src.states.engine_state.abstract_state import AbstractState
-
+from src.states.abstract_state import AbstractState
 from src.ui_components.button.button_group import ButtonGroup
 
 class Home(AbstractState):
@@ -9,7 +8,7 @@ class Home(AbstractState):
 
         self.__buttons = ButtonGroup(
             screen_rect=self._screen_rect,
-            labels=['Play', 'Options', 'Exit'],
+            labels=['Play', 'Exit'],
             dimension=(100, 200),
             vertical_center=True,
             horizontal_center=True
@@ -18,7 +17,13 @@ class Home(AbstractState):
     def draw(self):
         self.__buttons.draw(self._screen)
 
-    def handle_events(self, event):
-        self.__buttons.handle_events(event)
+    def handle_events(self, event, machine_observer):
+        label_button_pressed = self.__buttons.handle_events()
 
+        if label_button_pressed == 'Play':
+            machine_observer.ui_class = 'origin_cinematic'
+            self._exit = True
 
+        elif label_button_pressed == 'Exit':
+            machine_observer.exit = True
+            self._exit = True
