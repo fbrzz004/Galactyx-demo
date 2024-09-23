@@ -33,8 +33,7 @@ class AbstractState(ABC):
                     machine_observer.exit = True
                 else:
                     # manage other events
-                    self.handle_events(event)
-
+                    self.handle_events(event, machine_observer)
 
             # update the interface
             ui_update()
@@ -44,5 +43,5 @@ class AbstractState(ABC):
         pass
 
     @abstractmethod
-    def handle_events(self, event):
+    def handle_events(self, event, machine_observer):
         pass
