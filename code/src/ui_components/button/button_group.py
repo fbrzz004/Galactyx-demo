@@ -6,13 +6,15 @@ class ButtonGroup:
     def __init__(self,
                  screen_rect: Rect,
                  labels: list[str],
+                 backgrounds_button_color_default,
+                 backgrounds_button_color_on_top_of,
+                 labels_button_color,
                  dimension: list[float] | tuple[float, float] = None,
                  position: list[float] | tuple[float, float] = None,
                  vertical_center: bool = False,
                  horizontal_center: bool = False,
                  on_top: bool = False,
-                 on_left: bool = False
-                 ):
+                 on_left: bool = False):
 
         self.__set_rect(screen_rect,
                         position, dimension,
@@ -20,7 +22,11 @@ class ButtonGroup:
                         horizontal_center,
                         on_top, on_left)
 
-        self.__buttons = self.__instance_buttons(labels)
+        self.__buttons = self.__instance_buttons(
+                                        labels=labels,
+                                        backgrounds_button_color_on_top_of=backgrounds_button_color_on_top_of,
+                                        backgrounds_button_color_default=backgrounds_button_color_default,
+                                        labels_button_color=labels_button_color)
 
     def __set_rect(self, screen_rect: Rect,
                    position: list[float] | tuple[float, float],
@@ -49,7 +55,10 @@ class ButtonGroup:
         # instance the Rect class
         self.__rect = Rect(*position, *dimension)
 
-    def __instance_buttons(self, labels: list[str]) -> list[Button]:
+    def __instance_buttons(self, labels: list[str],
+                           backgrounds_button_color_default: str,
+                           backgrounds_button_color_on_top_of: str,
+                           labels_button_color: str) -> list[Button]:
         buttons = []
 
         # configure the position of all buttons
@@ -63,8 +72,9 @@ class ButtonGroup:
                 position=position,
                 dimension=dimension,
                 label=label,
-                background_color='black',
-                label_color='white'
+                backgrounds_button_color_default=backgrounds_button_color_default,
+                backgrounds_button_color_on_top_of=backgrounds_button_color_on_top_of,
+                labels_button_color=labels_button_color
             ))
 
         return buttons
