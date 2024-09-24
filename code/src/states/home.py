@@ -4,14 +4,17 @@ from src.ui_components.button.button_group import ButtonGroup
 class Home(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               background_color="White")
+                               path_image_background="..\\assets\\images\\ui\\background\\background_image_1.jpg")
 
         self.__buttons = ButtonGroup(
             screen_rect=self._screen_rect,
             labels=['Play', 'Exit'],
-            dimension=(100, 200),
+            dimension=(100, 100),
             vertical_center=True,
-            horizontal_center=True
+            horizontal_center=True,
+            backgrounds_button_color_default='White',
+            backgrounds_button_color_on_top_of='Gray',
+            labels_button_color='Black'
         )
 
     def draw(self):
