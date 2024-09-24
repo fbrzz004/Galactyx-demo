@@ -4,15 +4,25 @@ from pygame.display import flip as ui_update
 from pygame.event import get as get_event
 from pygame import QUIT
 
+from pygame import image
+from pygame.transform import scale
+
 class AbstractState(ABC):
-    def __init__(self, screen_instance, background_color = None, image_background = None):
+    def __init__(self, screen_instance, background_color = None, path_image_background = None):
         # screen instance
         self._screen = screen_instance
         self._screen_rect = self._screen.get_rect()
 
         # appearance features
-        self._image_background = image_background
-        self._background = background_color
+        self._image_background = None
+        self._background = background_color or 'Black'
+
+        if path_image_background:
+            self._image_background = scale(
+                surface=image.load(path_image_background),
+                size=self._screen_rect.size
+            )
+            self._image_background.set_alpha(100)
 
         # flag for exit of ui loop
         self._exit = False
@@ -22,6 +32,8 @@ class AbstractState(ABC):
         while not self._exit:
             # fill the screen with a color
             self._screen.fill(self._background)
+            if self._image_background:
+                self._screen.blit(self._image_background, (0, 0))
 
             # drawing zone
             self.draw()
