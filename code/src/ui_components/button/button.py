@@ -9,19 +9,20 @@ class Button:
                  position: list[float] | tuple[float, float],
                  dimension: list[float] | tuple[float, float],
                  label: str,
-                 background_color: str,
-                 label_color: str):
+                 backgrounds_button_color_default: str,
+                 backgrounds_button_color_on_top_of: str,
+                 labels_button_color: str):
 
         self.__rect = Rect(*position, *dimension)
         self.__label = label
 
         self.__colors = {
-            'default': Color(background_color),
-            'on_top_of': Color('Red'),
+            'default': backgrounds_button_color_default,
+            'on_top_of': backgrounds_button_color_on_top_of,
         }
         self.__type_color_background = 'default'
 
-        self.__label_color = Color(label_color)
+        self.__label_color = Color(labels_button_color)
 
         self.__font = Font(None, 20)
 
