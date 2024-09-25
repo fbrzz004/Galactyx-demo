@@ -8,7 +8,7 @@ from src.narratives.intro_narratives import intro_narrative
 class OriginCinematic(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               background_color="Black")
+                               path_image_background="..\\assets\\images\\ui\\background\\background_image_origin_cinematic.png")
 
         self.__display_narrative = NarrativeDisplay(screen_instance=screen_instance,
                                                     narrative=intro_narrative,
