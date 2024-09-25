@@ -1,4 +1,5 @@
-from src.ui_components.button.button import Button, Rect
+from src.ui_components.button.text_button import TextButton
+from pygame.rect import Rect
 
 # This class is a group of buttons
 class ButtonGroup:
@@ -58,7 +59,7 @@ class ButtonGroup:
     def __instance_buttons(self, labels: list[str],
                            backgrounds_button_color_default: str,
                            backgrounds_button_color_on_top_of: str,
-                           labels_button_color: str) -> list[Button]:
+                           labels_button_color: str) -> list[TextButton]:
         buttons = []
 
         # configure the position of all buttons
@@ -68,7 +69,7 @@ class ButtonGroup:
 
         # instance and add all buttons in list "buttons"
         for label, position in zip(labels, positions):
-            buttons.append(Button(
+            buttons.append(TextButton(
                 position=position,
                 dimension=dimension,
                 label=label,
