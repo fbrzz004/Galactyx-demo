@@ -1,7 +1,7 @@
 from tkinter.ttk import Treeview
 
 from src.states.abstract_state import AbstractState
-from src.ui_components.button.button import Button
+from src.ui_components.button.text_button import TextButton
 from src.ui_components.narrative_display.narrative_display import NarrativeDisplay
 from src.narratives.intro_narratives import intro_narrative
 
@@ -14,7 +14,7 @@ class OriginCinematic(AbstractState):
                                                     narrative=intro_narrative,
                                                     type_writer_effect=True)
 
-        self.__button_continue = Button(
+        self.__button_continue = TextButton(
             position=(self._screen_rect.width - 20 - 100,
                       self._screen_rect.height - 20 - 30),
             dimension=(100, 30),
