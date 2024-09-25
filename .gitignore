@@ -1,4 +1,8 @@
 code/.idea/ 
 __pycache__/
 __init__.py
+<<<<<<< HEAD
+=======
+*.bkp
+>>>>>>> develop-general-structure-game
 *.drawio
