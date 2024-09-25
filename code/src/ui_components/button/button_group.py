@@ -74,7 +74,7 @@ class ButtonGroup:
                 label=label,
                 backgrounds_button_color_default=backgrounds_button_color_default,
                 backgrounds_button_color_on_top_of=backgrounds_button_color_on_top_of,
-                labels_button_color=labels_button_color
+                label_button_color=labels_button_color
             ))
 
         return buttons

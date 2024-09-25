@@ -11,7 +11,7 @@ class Button:
                  label: str,
                  backgrounds_button_color_default: str,
                  backgrounds_button_color_on_top_of: str,
-                 labels_button_color: str):
+                 label_button_color: str):
 
         self.__rect = Rect(*position, *dimension)
         self.__label = label
@@ -22,7 +22,7 @@ class Button:
         }
         self.__type_color_background = 'default'
 
-        self.__label_color = Color(labels_button_color)
+        self.__label_color = Color(label_button_color)
 
         self.__font = Font(None, 20)
 
