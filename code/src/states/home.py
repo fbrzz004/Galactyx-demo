@@ -4,7 +4,8 @@ from src.ui_components.button.button_group import ButtonGroup
 class Home(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="..\\assets\\images\\ui\\background\\background_image_1.jpg")
+                               path_image_background="..\\assets\\images\\ui\\background\\background_image_home.jpg",
+                               background_opacity=100)
 
         self.__buttons = ButtonGroup(
             screen_rect=self._screen_rect,
