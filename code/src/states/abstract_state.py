@@ -8,7 +8,11 @@ from pygame import image
 from pygame.transform import scale
 
 class AbstractState(ABC):
-    def __init__(self, screen_instance, background_color = None, path_image_background = None):
+    def __init__(self, screen_instance,
+                 background_color = None,
+                 path_image_background = None,
+                 background_opacity = 255):
+
         # screen instance
         self._screen = screen_instance
         self._screen_rect = self._screen.get_rect()
@@ -22,7 +26,7 @@ class AbstractState(ABC):
                 surface=image.load(path_image_background),
                 size=self._screen_rect.size
             )
-            self._image_background.set_alpha(100)
+            self._image_background.set_alpha(background_opacity)
 
         # flag for exit of ui loop
         self._exit = False
