@@ -10,7 +10,8 @@ class OriginCinematic(AbstractState):
 
         self.__display_narrative = NarrativeDisplay(screen_instance=screen_instance,
                                                     narrative=intro_narrative,
-                                                    type_writer_effect=True)
+                                                    type_writer_effect=True,
+                                                    background_color='black')
 
         self.__button_continue = TextButton(
             position=(self._screen_rect.width - 20 - 100,
