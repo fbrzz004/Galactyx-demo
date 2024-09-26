@@ -1,5 +1,3 @@
-from tkinter.ttk import Treeview
-
 from src.states.abstract_state import AbstractState
 from src.ui_components.button.text_button import TextButton
 from src.ui_components.narrative_display.narrative_display import NarrativeDisplay
@@ -32,9 +30,10 @@ class OriginCinematic(AbstractState):
 
 
     def handle_events(self, event, machine_observer):
-        label_button_pressed = self.__button_continue.handle_event()
+        if self.__display_narrative.is_end():
+            label_button_pressed = self.__button_continue.handle_event()
 
-        if label_button_pressed == 'Continue':
-            machine_observer.ui_class = 'map_levels'
-            self._exit = True
+            if label_button_pressed == 'Continue':
+                machine_observer.ui_class = 'map_levels'
+                self._exit = True
 
