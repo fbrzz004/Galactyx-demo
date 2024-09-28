@@ -5,21 +5,21 @@ from src.ui_components.button.image_button import ImageButton
 class MapLevels(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="..\\assets\\images\\ui\\background\\background_image_map.jpg",
+                               path_image_background="assets\\images\\ui\\background\\background_image_map.jpg",
                                background_opacity=100)
 
         self.__andromeda = ImageButton(
             dimension=(100, 200),
             position=(200, 300),
             label='andromeda',
-            path_image="..\\assets\\images\\galaxies\\galaxy-andromeda.png"
+            path_image="assets\\images\\galaxies\\galaxy-andromeda.png"
         )
 
         self.__triangulum = ImageButton(
             dimension=(200, 200),
             position=(450, 40),
             label='triangulum',
-            path_image="..\\assets\\images\\galaxies\\galaxy-triangulum.png"
+            path_image="assets\\images\\galaxies\\galaxy-triangulum.png"
         )
 
     def draw(self):
