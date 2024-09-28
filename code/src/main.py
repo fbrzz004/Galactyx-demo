@@ -1,4 +1,4 @@
-from states.engine_state.engine_state import EngineState
+from .states.engine_state.engine_state import EngineState
 
 # main
 if __name__ == '__main__':

@@ -75,19 +75,29 @@ To install all the necessary dependencies for this project, make sure you have [
 
 Then, run the following command in your terminal from the root directory of the project:
 
+
 ```bash
+
 pip install -r requirements
+
 ```
-Navigate to Galactyx-demo\code> directory on a project and execute below:
+
+
+Navigate to Galactyx-demo\code> directory and execute
+
 
 ```bash
+
 $env:PYTHONPATH = "$(pwd);$env:PYTHONPATH"
+
 ```
 
-and then:
+then
 
 ```bash
+
 python src\main.py
+
 ```
 
 
