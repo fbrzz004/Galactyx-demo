@@ -22,7 +22,7 @@ class EngineObserver:
         if name_ui in list(navigation.keys()):
             self.__ui_class = navigation[name_ui]
         else:
-            raise "Not found a ui class."
+            raise "ui class not found."
 
 
 
