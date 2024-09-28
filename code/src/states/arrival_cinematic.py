@@ -5,7 +5,7 @@ from src.ui_components.button.text_button import TextButton
 class ArrivalCinematic(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="..\\assets\\images\\ui\\background\\background_image_arrival.png")
+                               path_image_background="assets\\images\\ui\\background\\background_image_arrival.png")
 
         self.__button_to_end = TextButton(
             position=(self._screen_rect.width - 20 - 100,

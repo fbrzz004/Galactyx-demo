@@ -5,7 +5,7 @@ from src.ui_components.button.text_button import TextButton
 class End(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="..\\assets\\images\\ui\\background\\background_image_end.png")
+                               path_image_background="assets\\images\\ui\\background\\background_image_end.png")
 
         # only test
         self.__button_menu = TextButton(

@@ -11,7 +11,7 @@ class Enemy:
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
 
-        self.__image = rotate(surface=load_image("..\\assets\\images\\enemy\\enemy.png"),
+        self.__image = rotate(surface=load_image("assets\\images\\enemy\\enemy.png"),
                               angle=180)
 
         self.__standard_scale_factor = 1/6
