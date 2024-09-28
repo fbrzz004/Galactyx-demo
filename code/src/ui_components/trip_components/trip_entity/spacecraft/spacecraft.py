@@ -1,10 +1,6 @@
-from pygame import (KEYDOWN,
-                    KEYUP,
-                    K_LEFT,
-                    K_RIGHT,
-                    K_ESCAPE,
-                    K_a,
-                    K_d)
+from pygame import (KEYDOWN, KEYUP,
+                    K_LEFT, K_RIGHT, K_ESCAPE,
+                    K_a, K_d)
 from pygame.image import load as load_image
 from pygame.transform import scale
 
@@ -81,3 +77,19 @@ class Spacecraft:
         self.__propulsion_up()
         self.__move()
         self.__screen.blit(self.__image, self.__image_rect)
+
+
+    class __SpaceshipBullet:
+        pass
+
+    class __Jet:
+        def __init__(self, screen_instance, image_rect):
+            self.__screen = screen_instance
+            self.__screen_rect = screen_instance.get_rect()
+
+            self.__image_rect = image_rect
+            self.__y_init = self.__image_rect.y + self.__image_rect.height
+
+            self.__x_main_init = 0
+            self.__x_left_init = 0
+            self.__x_right_init = 0
