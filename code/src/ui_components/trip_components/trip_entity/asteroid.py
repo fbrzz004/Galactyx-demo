@@ -11,7 +11,7 @@ class Asteroid:
 
         # initial config image
         self.__standard_size_factor = 1/8
-        self.__image = load_image("..\\assets\\images\\asteroid\\asteroid.png")
+        self.__image = load_image("assets\\images\\asteroid\\asteroid.png")
         self.__image = scale(self.__image, (self.__image.get_rect().width * self.__standard_size_factor,
                                             self.__image.get_rect().height * self.__standard_size_factor))
         self.__original_image = self.__image.copy()
