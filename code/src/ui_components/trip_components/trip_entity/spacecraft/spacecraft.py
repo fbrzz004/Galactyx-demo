@@ -4,6 +4,8 @@ from pygame import (KEYDOWN, KEYUP,
 from pygame.image import load as load_image
 from pygame.transform import scale
 
+from src.ui_components.trip_components.trip_entity.spacecraft.jet import MainJet
+
 
 class Spacecraft:
     def __init__(self, screen_instance):
@@ -22,8 +24,14 @@ class Spacecraft:
         self.__image_rect.y = self.__screen_rect.height - self.__image_rect.height - 150
 
         # velocity x config
-        self.__velocity_x = 10
+        self.__velocity_x = 6
         self.__vx = 0
+
+        # main jet
+        self.__main_jet = MainJet(
+            screen_instance=screen_instance,
+            image_rect=self.__image_rect
+        )
 
     def handler(self, event):
         if event.type == KEYDOWN:
@@ -77,19 +85,9 @@ class Spacecraft:
         self.__propulsion_up()
         self.__move()
         self.__screen.blit(self.__image, self.__image_rect)
+        self.__main_jet.run()
 
 
-    class __SpaceshipBullet:
+    class SpaceshipBullet:
         pass
 
-    class __Jet:
-        def __init__(self, screen_instance, image_rect):
-            self.__screen = screen_instance
-            self.__screen_rect = screen_instance.get_rect()
-
-            self.__image_rect = image_rect
-            self.__y_init = self.__image_rect.y + self.__image_rect.height
-
-            self.__x_main_init = 0
-            self.__x_left_init = 0
-            self.__x_right_init = 0
