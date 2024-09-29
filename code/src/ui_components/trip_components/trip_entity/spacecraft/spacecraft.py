@@ -4,7 +4,7 @@ from pygame import (KEYDOWN, KEYUP,
 from pygame.image import load as load_image
 from pygame.transform import scale
 
-from src.ui_components.trip_components.trip_entity.spacecraft.jet import MainJet
+from src.ui_components.trip_components.trip_entity.spacecraft.jet import MainJet, DirectionalJet
 
 
 class Spacecraft:
@@ -33,20 +33,36 @@ class Spacecraft:
             image_rect=self.__image_rect
         )
 
+        # directional jet
+        self.__directional_jet = DirectionalJet(
+            screen_instance=screen_instance,
+            image_rect=self.__image_rect
+        )
+
     def handler(self, event):
         if event.type == KEYDOWN:
             if event.key in [K_LEFT, K_a]: # to move on the left
                 self.__to_left()
+                self.__directional_jet.on_right()
 
             if event.key in [K_RIGHT, K_d]: # to move on the right
                 self.__to_right()
+                self.__directional_jet.on_left()
 
             if event.key == K_ESCAPE: # to shoot
                 self.__shoot()
 
         if event.type == KEYUP:
-            if event.key in [K_LEFT, K_RIGHT, K_a, K_d]:
+            if event.key in [K_LEFT, K_a]: # to move on the left
                 self.__vx = 0
+                self.__directional_jet.off_right()
+
+            if event.key in [K_RIGHT, K_d]: # to move on the right
+                self.__vx = 0
+                self.__directional_jet.off_left()
+
+            if event.key == K_ESCAPE: # to shoot
+                pass
 
 
     def __to_right(self):
@@ -64,29 +80,19 @@ class Spacecraft:
         if self.__image_rect.x > self.__screen_rect.width - self.__image_rect.width:
             self.__image_rect.x = self.__screen_rect.width - self.__image_rect.width
 
-        if self.__vx < 0:
-            self.__propulsion_left()
-        elif self.__vx > 0:
-            self.__propulsion_right()
+        if self.__vx != 0:
+            self.__directional_jet.run()
 
     def __shoot(self):
         pass
 
-    def __propulsion_left(self):
-        pass
-
-    def __propulsion_right(self):
-        pass
-
     def __propulsion_up(self):
-        pass
+        self.__main_jet.run()
 
     def run(self):
         self.__propulsion_up()
         self.__move()
         self.__screen.blit(self.__image, self.__image_rect)
-        self.__main_jet.run()
-
 
     class SpaceshipBullet:
         pass
