@@ -62,7 +62,7 @@ Humanity has ecologically destroyed earth and is searching for new planets to in
 Credits:
 
 - André Román
-- Pedro Sota
+- Pedro Sota (@nycodef)
 - Adrián Palacios
 - Nataly Ochoa
 - Vilberto Patricio
@@ -78,6 +78,21 @@ Then, run the following command in your terminal from the root directory of the 
 ```bash
 pip install -r requirements
 ```
+Navigate to Galactyx-demo\code> directory on a project and execute below:
+
+```bash
+$env:PYTHONPATH = "$(pwd);$env:PYTHONPATH"
+```
+
+and then:
+
+```bash
+python src\main.py
+```
+
+
+
+
 
 ---- * StarTracers * ----
 
