@@ -3,7 +3,7 @@ import time
 from src.states.abstract_state import AbstractState
 from src.ui_components.button.text_button import TextButton
 from src.ui_components.narrative_display.narrative_display import NarrativeDisplay
-from src.narratives import intro_narratives
+from src.narratives.intro_narratives import intro_narrative
 
 class OriginCinematic(AbstractState):
     def __init__(self, screen_instance):
@@ -11,23 +11,23 @@ class OriginCinematic(AbstractState):
 
         # Cargar las imágenes de las diferentes escenas
         self.__images = [
-            pygame.image.load("assets\\images\\ui\\background\\background_image_trip.png"),  # Primera imagen
-            pygame.image.load("assets\\images\\ui\\background\\background_image_trip.png"),     # Segunda imagen (zoom y narrativa 1)
-            pygame.image.load("assets\\images\\planet\\planet_destructive.png"),# Tercera imagen (narrativa 2)
-            pygame.image.load("assets\\images\\planet\\nave.png"),        # Cuarta imagen (narrativa 3)
-            pygame.image.load("assets\\images\\planet\\chain_character.png"), # Quinta imagen (narrativa 4)
-            pygame.image.load("assets\\images\\planet\\naveship.png"),      # Sexta imagen (narrativa 5)
-            pygame.image.load("assets\\images\\planet\\end.png")      # Séptima imagen (narrativa 6)
+            pygame.image.load("assets\\images\\ui\\background\\background_image_trip.png"),  # En el espacio: Buscando al planeta.
+            pygame.image.load("assets\\images\\planet\\starts03.png"),          # Se muestra el planeta (lo que antes era)
+            pygame.image.load("assets\\images\\planet\\planet_destructive.png"),# Se muestra la actualidad del planeta (destruido)
+            pygame.image.load("assets\\images\\planet\\nave.png"),        # Naves alrededor del planeta destruyendo. Naves nodrizas
+            pygame.image.load("assets\\images\\planet\\chain_character.png"), # Se enfoca en el personaje principal para tener una misión.
+            pygame.image.load("assets\\images\\planet\\naveship.png"),      # Se muestra el interior de la nave del personaje principal.
+            pygame.image.load("assets\\images\\planet\\end.png")      # Finaliza cuando la nave del personaje va rumbo a buscar planeta.
         ]
 
         # Configuración de las narrativas para cada imagen
         self.__narratives = [
-            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narratives[0], type_writer_effect=True, background_color='black'),
-            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narratives[1], type_writer_effect=True, background_color='black'),
-            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narratives[2], type_writer_effect=True, background_color='black'),
-            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narratives[3], type_writer_effect=True, background_color='black'),
-            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narratives[4], type_writer_effect=True, background_color='black'),
-            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narratives[5], type_writer_effect=True, background_color='black')
+            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[0], type_writer_effect=True, background_color='black'),
+            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[1], type_writer_effect=True, background_color='black'),
+            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[2], type_writer_effect=True, background_color='black'),
+            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[3], type_writer_effect=True, background_color='black'),
+            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[4], type_writer_effect=True, background_color='black'),
+            NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[5], type_writer_effect=True, background_color='black')
         ]
 
         self.__button_continue = TextButton(
@@ -42,8 +42,8 @@ class OriginCinematic(AbstractState):
         self.__current_image_index = 0  # Índice de la imagen actual
         self.__zooming = True  # Empezamos con el zoom en la primera imagen
         self.__zoom_factor = 1.0  # Zoom inicial
-        self.__zoom_speed = 0.01  # Velocidad de zoom
-        self.__zoom_duration = 3  # Duración del zoom en segundos
+        self.__zoom_speed = 0.001  # Velocidad de zoom
+        self.__zoom_duration = 2  # Duración del zoom en segundos
         self.__start_time = time.time()  # Tiempo de inicio del zoom
         self.__narrative_started = False  # Para controlar cuándo empieza la narrativa
 
