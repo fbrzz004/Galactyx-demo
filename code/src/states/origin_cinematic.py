@@ -9,7 +9,7 @@ class OriginCinematic(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance)
 
-        # Cargar las imágenes de las diferentes escenas
+        # Imagenes
         self.__images = [
             pygame.image.load("assets\\images\\ui\\background\\background_image_trip.png"),  # En el espacio: Buscando al planeta.
             pygame.image.load("assets\\images\\planet\\starts03.png"),          # Se muestra el planeta (lo que antes era)
@@ -20,7 +20,7 @@ class OriginCinematic(AbstractState):
             pygame.image.load("assets\\images\\planet\\end.png")      # Finaliza cuando la nave del personaje va rumbo a buscar planeta.
         ]
 
-        # Configuración de las narrativas para cada imagen
+        # Narrativas
         self.__narratives = [
             NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[0], type_writer_effect=True, background_color='black'),
             NarrativeDisplay(screen_instance=screen_instance, narrative=intro_narrative[1], type_writer_effect=True, background_color='black'),
@@ -39,13 +39,14 @@ class OriginCinematic(AbstractState):
             label_button_color='Black'
         )
 
-        self.__current_image_index = 0  # Índice de la imagen actual
-        self.__zooming = True  # Empezamos con el zoom en la primera imagen
-        self.__zoom_factor = 1.0  # Zoom inicial
-        self.__zoom_speed = 0.001  # Velocidad de zoom
-        self.__zoom_duration = 2  # Duración del zoom en segundos
-        self.__start_time = time.time()  # Tiempo de inicio del zoom
-        self.__narrative_started = False  # Para controlar cuándo empieza la narrativa
+        # Variables para el zoom y el control de la narrativa
+        self.__current_image_index = 0 
+        self.__zooming = True  
+        self.__zoom_factor = 1.0  
+        self.__zoom_speed = 0.001  
+        self.__zoom_duration = 2  
+        self.__start_time = time.time()  
+        self.__narrative_started = False  
 
     def draw(self):
         # Obtener la imagen actual
@@ -53,49 +54,46 @@ class OriginCinematic(AbstractState):
 
         # Aplicar efecto de zoom si es necesario
         if self.__zooming:
-            # Calcular cuánto tiempo ha pasado
             elapsed_time = time.time() - self.__start_time
             if elapsed_time < self.__zoom_duration:
-                # Aumentar el factor de zoom con el tiempo
+                # Factor de zoom
                 self.__zoom_factor += self.__zoom_speed
                 zoomed_image = pygame.transform.scale(
                     current_image,
                     (int(self._screen_rect.width * self.__zoom_factor),
                      int(self._screen_rect.height * self.__zoom_factor))
                 )
-                # Centramos la imagen al hacer zoom
+                # Centramos la imagen
                 zoom_rect = zoomed_image.get_rect(center=self._screen_rect.center)
                 self._screen.blit(zoomed_image, zoom_rect)
             else:
-                # Terminar el zoom después de la duración y mostrar la imagen a tamaño completo
+                # Redimension de la imagen en tamaño completo
                 self.__zooming = False
                 self._screen.blit(pygame.transform.scale(current_image, (self._screen_rect.width, self._screen_rect.height)), (0, 0))
                 self.__narrative_started = True  # Activar la narrativa
         else:
-            # Mostrar la imagen actual a tamaño completo si no hay zoom
             self._screen.blit(pygame.transform.scale(current_image, (self._screen_rect.width, self._screen_rect.height)), (0, 0))
 
-            # Mostrar la narrativa asociada a la imagen actual si está activada
+            # Mostrar la narrativa
             if self.__narrative_started:
                 self.__narratives[self.__current_image_index].run()
 
-                # Si la narrativa ha terminado, permitir el cambio de imagen con el botón
+                # Mostrar el boton para pasar a la siguiente imagen
                 if self.__narratives[self.__current_image_index].is_end():
                     self.__button_continue.draw(self._screen)
 
     def handle_events(self, event, machine_observer):
-        # Solo permitimos interacción si la narrativa ha terminado
         if self.__narratives[self.__current_image_index].is_end():
             label_button_pressed = self.__button_continue.handle_event()
 
-            # Al presionar el botón "Continue", avanzamos a la siguiente imagen/narrativa
+            # Pasar de imagen en imagen con su respectiva narrativa
             if label_button_pressed == 'Continue':
                 if self.__current_image_index < len(self.__images) - 1:
-                    self.__current_image_index += 1  # Pasamos a la siguiente imagen
-                    self.__zooming = True  # Reiniciamos el zoom para la nueva imagen
-                    self.__zoom_factor = 1.0  # Reset del zoom
-                    self.__start_time = time.time()  # Reiniciar el tiempo de inicio
-                    self.__narrative_started = False  # Reiniciar el estado de narrativa
+                    self.__current_image_index += 1 
+                    self.__zooming = True  
+                    self.__zoom_factor = 1.0  
+                    self.__start_time = time.time()  
+                    self.__narrative_started = False 
                 else:
                     # Si estamos en la última imagen, finalizar el estado
                     machine_observer.ui_class = 'map_levels'
