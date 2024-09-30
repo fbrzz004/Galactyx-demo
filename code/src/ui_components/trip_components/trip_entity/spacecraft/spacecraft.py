@@ -1,10 +1,11 @@
 from pygame import (KEYDOWN, KEYUP,
-                    K_LEFT, K_RIGHT, K_ESCAPE,
+                    K_LEFT, K_RIGHT, K_SPACE,
                     K_a, K_d)
 from pygame.image import load as load_image
 from pygame.transform import scale
 
-from src.ui_components.trip_components.trip_entity.spacecraft.jet import MainJet, DirectionalJet
+from ..spacecraft.jet import MainJet, DirectionalJet
+from .weapon import Weapon
 
 
 class Spacecraft:
@@ -39,7 +40,13 @@ class Spacecraft:
             image_rect=self.__image_rect
         )
 
-    def handler(self, event):
+        # weapon
+        self.__weapon = Weapon(
+            screen_instance=screen_instance,
+            spacecraft_rect=self.__image_rect
+        )
+
+    def handler(self, event, manager_bullet):
         if event.type == KEYDOWN:
             if event.key in [K_LEFT, K_a]: # to move on the left
                 self.__to_left()
@@ -49,8 +56,8 @@ class Spacecraft:
                 self.__to_right()
                 self.__directional_jet.on_left()
 
-            if event.key == K_ESCAPE: # to shoot
-                self.__shoot()
+            if event.key == K_SPACE: # to shoot
+                self.__shoot(manager_bullet)
 
         if event.type == KEYUP:
             if event.key in [K_LEFT, K_a]: # to move on the left
@@ -61,9 +68,8 @@ class Spacecraft:
                 self.__vx = 0
                 self.__directional_jet.off_left()
 
-            if event.key == K_ESCAPE: # to shoot
+            if event.key == K_SPACE: # to shoot
                 pass
-
 
     def __to_right(self):
         self.__vx = self.__velocity_x
@@ -83,8 +89,11 @@ class Spacecraft:
         if self.__vx != 0:
             self.__directional_jet.run()
 
-    def __shoot(self):
-        pass
+    def __shoot(self, manager_bullet):
+        self.__weapon.shoot(
+            manager_bullet=manager_bullet,
+            energy=5
+        )
 
     def __propulsion_up(self):
         self.__main_jet.run()
@@ -93,7 +102,3 @@ class Spacecraft:
         self.__propulsion_up()
         self.__move()
         self.__screen.blit(self.__image, self.__image_rect)
-
-    class SpaceshipBullet:
-        pass
-
