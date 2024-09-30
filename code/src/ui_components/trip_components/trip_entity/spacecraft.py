@@ -1,3 +1,4 @@
+from pathlib import Path
 from pygame import (KEYDOWN,
                     KEYUP,
                     K_LEFT,
@@ -17,7 +18,7 @@ class Spacecraft:
 
         # player image
         self.__standard_size_factor = 1/5
-        self.__image = load_image("assets\\images\\player\\player_spaceship.png")
+        path_image_player = Path("assets/images/player/player_spaceship.png")
         self.__image = scale(self.__image, (self.__image.get_rect().width * self.__standard_size_factor,
                                             self.__image.get_rect().height * self.__standard_size_factor))
         self.__image_rect = self.__image.get_rect()

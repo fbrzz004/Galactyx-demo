@@ -1,3 +1,4 @@
+from pathlib import Path
 from src.states.abstract_state import AbstractState
 from src.ui_components.button.text_button import TextButton
 from src.ui_components.narrative_display.narrative_display import NarrativeDisplay
@@ -5,8 +6,10 @@ from src.narratives.intro_narratives import intro_narrative
 
 class OriginCinematic(AbstractState):
     def __init__(self, screen_instance):
+        path_image_background = Path("assets/images/ui/background/background_image_origin_cinematic.png")
+
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="assets\\images\\ui\\background\\background_image_origin_cinematic.png")
+                               path_image_background=str(path_image_background))
 
         self.__display_narrative = NarrativeDisplay(screen_instance=screen_instance,
                                                     narrative=intro_narrative,
@@ -29,7 +32,6 @@ class OriginCinematic(AbstractState):
         if self.__display_narrative.is_end():
             self.__button_continue.draw(self._screen)
 
-
     def handle_events(self, event, machine_observer):
         if self.__display_narrative.is_end():
             label_button_pressed = self.__button_continue.handle_event()
@@ -37,4 +39,3 @@ class OriginCinematic(AbstractState):
             if label_button_pressed == 'Continue':
                 machine_observer.ui_class = 'map_levels'
                 self._exit = True
-

@@ -1,5 +1,5 @@
+from pathlib import Path
 from random import uniform, randint
-
 from pygame.image import load as load_image
 from pygame.transform import scale, rotate
 
@@ -11,11 +11,11 @@ class Asteroid:
 
         # initial config image
         self.__standard_size_factor = 1/8
-        self.__image = load_image("assets\\images\\asteroid\\asteroid.png")
+        path_image_asteroid = Path("assets/images/asteroid/asteroid.png")
+        self.__image = load_image(str(path_image_asteroid))
         self.__image = scale(self.__image, (self.__image.get_rect().width * self.__standard_size_factor,
                                             self.__image.get_rect().height * self.__standard_size_factor))
         self.__original_image = self.__image.copy()
-
 
         self.__random_scale_image()
         self.__random_rotate_image()

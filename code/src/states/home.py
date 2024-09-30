@@ -1,10 +1,13 @@
+from pathlib import Path
 from src.states.abstract_state import AbstractState
 from src.ui_components.button.button_group import ButtonGroup
 
 class Home(AbstractState):
     def __init__(self, screen_instance):
+        path_image_background = Path("assets/images/ui/background/background_image_home.jpg")
+
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="assets\\images\\ui\\background\\background_image_home.jpg",
+                               path_image_background=str(path_image_background),
                                background_opacity=100)
 
         self.__buttons = ButtonGroup(

@@ -8,7 +8,7 @@ class NarrativeDisplay:
     def __init__(self,
                  screen_instance,
                  narrative: list[str],
-                 time_sleep_by_word: float = .5,  # time in seconds
+                 time_sleep_by_word: float = .01,  # time in seconds
                  text_color: str = 'White',
                  type_writer_effect: bool = False,
                  background_color=None):
@@ -20,7 +20,7 @@ class NarrativeDisplay:
         # times
         self.__time_sleep_by_word = time_sleep_by_word
         self.__time_sleep_by_paragraph = 0
-        self.__average_reading_time_by_words = 2
+        self.__average_reading_time_by_words = 0.01
 
         # rect
         self.__rect_padding = 10

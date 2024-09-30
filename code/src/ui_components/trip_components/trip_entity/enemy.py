@@ -1,5 +1,5 @@
+from pathlib import Path
 from random import uniform
-
 from pygame.image import load as load_image
 from pygame.transform import rotate, scale
 
@@ -11,7 +11,8 @@ class Enemy:
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
 
-        self.__image = rotate(surface=load_image("assets\\images\\enemy\\enemy.png"),
+        path_image_enemy = Path("assets/images/enemy/enemy.png")
+        self.__image = rotate(surface=load_image(str(path_image_enemy)),
                               angle=180)
 
         self.__standard_scale_factor = 1/6
