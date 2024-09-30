@@ -5,12 +5,12 @@ from src.ui_components.trip_components.trip_entity.galaxy import Galaxy
 from src.ui_components.trip_components.trip_entity.cinematic_spacecraft import CinematicSpacecraft
 
 class ArrivalCinematic(AbstractState):
-    def __init__(self, screen_instance):
+    def __init__(self, screen_instance, galaxy_image_path="assets/images/galaxies/galaxy-andromeda.png"):
         
         AbstractState.__init__(self, screen_instance=screen_instance,
                                path_image_background="assets\\images\\ui\\background\\background_image_arrival.png")
 
-        self.galaxy = Galaxy(screen_instance)
+        self.galaxy = Galaxy(screen_instance, galaxy_image_path=galaxy_image_path)
         self.cinematic_spacecraft = CinematicSpacecraft(screen_instance)
 
         self.__button_to_end = TextButton(

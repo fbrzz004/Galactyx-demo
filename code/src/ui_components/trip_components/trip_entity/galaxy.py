@@ -3,7 +3,7 @@ from pygame.image import load as load_image
 from pygame.transform import scale, rotate
 
 class Galaxy:
-    def __init__(self, screen_instance, galaxy_image_path="assets/images/galaxies/galaxy-andromeda.png"):
+    def __init__(self, screen_instance, galaxy_image_path):
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
 
