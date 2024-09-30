@@ -2,7 +2,9 @@ from src.ui_components.trip_components.trip_background.star_background import St
 from src.ui_components.trip_components.trip_entity.enemy import Enemy
 from src.ui_components.trip_components.trip_entity.group_asteroid import GroupAsteroid
 from src.ui_components.trip_components.trip_entity.dyson_sphere import DysonSphere
-from src.ui_components.trip_components.trip_entity.spacecraft import Spacecraft
+from src.ui_components.trip_components.trip_entity.spacecraft.spacecraft import Spacecraft
+
+from ...ui_components.trip_components.trip_entity.spacecraft.bullet.manager_bullet import ManagerBullet
 
 
 class GameTrip:
@@ -30,6 +32,12 @@ class GameTrip:
             screen_instance=screen_instance
         )
 
+        # this obj manage the bullet spacecraft's weapon
+        self.__manager_bullet = ManagerBullet()
+
+    def __verify_collision_bullet_with_other_objet(self):
+        pass
+
     def draw(self):
         # draw background star
         self.__star_background.draw()
@@ -46,5 +54,8 @@ class GameTrip:
         # draw the spacecraft
         self.__player_spacecraft.run()
 
+        # run the manager of bullet
+        self.__manager_bullet.run()
+
     def handle_events(self, event):
-        self.__player_spacecraft.handler(event)
+        self.__player_spacecraft.handler(event, manager_bullet=self.__manager_bullet)
