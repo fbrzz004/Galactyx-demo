@@ -6,7 +6,7 @@ from pygame import init, quit
 class EngineState:
     def __init__(self):
         # instantiate a window with the size specified
-        self.__screen_instance = Screen()
+        self.__screen_instance = Screen([800, 600])
         # instantiate observer for engine attributes
         self.__observer = EngineObserver()
 

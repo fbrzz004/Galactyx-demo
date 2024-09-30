@@ -13,7 +13,7 @@ class CinematicSpacecraft:
         self.__original_image = load_image("assets/images/player/player_spaceship.png").convert_alpha()
 
         # rotate image
-        self.__rotated_image = rotate(self.__original_image, -55)
+        self.__rotated_image = rotate(self.__original_image, -60)
          
         self.__scaled_image = scale(
             self.__rotated_image,
@@ -34,7 +34,7 @@ class CinematicSpacecraft:
         self.__velocity_y = -3.0 
 
         # scale
-        self.__scale_increment = 0.04 
+        self.__scale_increment = 0.06 
         self.__current_scale = 1.0 
     def update(self):
         # update position 

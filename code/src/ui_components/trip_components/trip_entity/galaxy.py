@@ -3,13 +3,13 @@ from pygame.image import load as load_image
 from pygame.transform import scale, rotate
 
 class Galaxy:
-    def __init__(self, screen_instance):
+    def __init__(self, screen_instance, galaxy_image_path="assets/images/galaxies/galaxy-andromeda.png"):
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
 
         # Load the original galaxy image
-        self.__original_image = load_image("assets/images/galaxies/galaxy-andromeda.png").convert_alpha()
-
+        self.__original_image = load_image(galaxy_image_path).convert_alpha()
+        
         # Initial size configuration
         self.__initial_size = (300, 300)  # Initial size
         self.__max_size = (600, 600)      # Maximum size
@@ -23,7 +23,7 @@ class Galaxy:
         self.__image_rect.topright = (self.__screen_rect.width, 0)
 
         # Velocity and scale configuration
-        self.__velocity_x = 0.5    # Velocity of left movement (pixels/frame)
+        self.__velocity_x = 2    # Velocity of left movement (pixels/frame)
         self.__scale_increment = 1.4  # Scale increment for each frame
 
     def __update_position(self):
