@@ -3,9 +3,13 @@ from random import uniform, randint
 from pygame.image import load as load_image
 from pygame.transform import scale, rotate
 
+from src.ui_components.trip_components.trip_entity.destroyable import Destroyable
 
-class Asteroid:
+
+class Asteroid(Destroyable):
     def __init__(self, screen_instance):
+        Destroyable.__init__(self)
+
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
 
@@ -21,6 +25,7 @@ class Asteroid:
         self.__random_rotate_image()
         self.__random_initial_position()
         self.__random_initial_velocity()
+
 
     def __random_scale_image(self):
         # random size config
@@ -45,15 +50,19 @@ class Asteroid:
         self.__velocity_y = uniform(1, 4)
 
     def __moving(self):
-        if self.__image_rect.y > self.__screen_rect.height + 5:
+        if self.__image_rect.y > self.__screen_rect.height + 5 or self._get_destroyed():
             self.__random_scale_image()
             self.__random_rotate_image()
             self.__random_initial_position()
             self.__random_initial_velocity()
 
+            self._un_destroyed()
         else:
             self.__image_rect.y += self.__velocity_y
             self.__image_rect.x += self.__velocity_x
+
+    def get_rect(self):
+        return self.__image_rect
 
     def run(self):
         self.__moving()
