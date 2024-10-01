@@ -29,11 +29,12 @@ class Bullet:
             if r.y < -self.__max_length:
                 self.__rects.remove(r)
 
-            print(r.height)
-
     def __draw(self):
         for r in self.__rects:
             rect(self.__screen, (255, 0, 0), r)
+
+    def get_rects(self):
+        return self.__rects
 
     def run(self):
         self.__auto_move()
