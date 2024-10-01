@@ -36,7 +36,7 @@ class GameTrip:
         self.__manager_bullet = ManagerBullet()
 
     def __verify_collision_bullet_with_other_objet(self):
-        pass
+        self.__manager_bullet.is_collision(self.__group_asteroid.get_rect_callable_collision())
 
     def draw(self):
         # draw background star
@@ -59,3 +59,5 @@ class GameTrip:
 
     def handle_events(self, event):
         self.__player_spacecraft.handler(event, manager_bullet=self.__manager_bullet)
+        self.__verify_collision_bullet_with_other_objet()
+
