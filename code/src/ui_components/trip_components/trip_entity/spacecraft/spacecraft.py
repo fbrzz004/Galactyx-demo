@@ -9,7 +9,7 @@ from .weapon import Weapon
 
 
 class Spacecraft:
-    def __init__(self, screen_instance):
+    def __init__(self, screen_instance, get_energy):
         # screen
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
@@ -43,7 +43,8 @@ class Spacecraft:
         # weapon
         self.__weapon = Weapon(
             screen_instance=screen_instance,
-            spacecraft_rect=self.__image_rect
+            spacecraft_rect=self.__image_rect,
+            get_energy=get_energy
         )
 
     def handler(self, event, manager_bullet):
@@ -98,7 +99,14 @@ class Spacecraft:
     def __propulsion_up(self):
         self.__main_jet.run()
 
+    def get_rect(self):
+        return self.__image_rect
+
+    def get_energy_weapon(self):
+        return self.__weapon.get_energy
+
     def run(self):
         self.__propulsion_up()
         self.__move()
         self.__screen.blit(self.__image, self.__image_rect)
+        self.__weapon.auto_get_energy()
