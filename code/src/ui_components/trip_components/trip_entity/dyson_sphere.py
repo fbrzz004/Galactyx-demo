@@ -1,19 +1,70 @@
+from pygame import Color, Surface, SRCALPHA
 from pygame.image import load as load_image
 from pygame.transform import scale
+from pygame.draw import polygon
+from random import randint
 
 
 class DysonSphere:
     def __init__(self, screen_instance):
 
-        self.__position = (-100, -100)
+        self.__position = (0, 0)
         self.__size = (300, 300)
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
         self.__image = load_image("assets\\images\\dyson_sphere\\dyson_sphere.png")
         self.__image = scale(self.__image, self.__size)
 
-    def __auto_move(self):
-        pass
+        self.__color = Color(255, 223, 0, 128)
+
+        self.__points = []
+        self.__active = True
+
+        self.__time = 0
+
+        self.__rect_energy = None
+
+    def __set_the_time(self, a, b):
+        self.__time = randint(a, b)
+
+    def __set_polygon(self):
+        random_range = randint(100, 300)
+        p1 = randint(0, self.__screen_rect.width - random_range)
+        self.__points = [self.__image.get_rect().center,
+                         self.__image.get_rect().center,
+                         [p1, self.__screen_rect.height],
+                         [p1 + random_range, self.__screen_rect.height]]
+
+    def __draw(self):
+        if self.__active:
+
+            transparent_surface = Surface(self.__screen_rect.size, SRCALPHA)
+
+            self.__rect_energy = polygon(surface=transparent_surface,
+                    color=self.__color,
+                    points=self.__points)
+
+            self.__screen.blit(transparent_surface, (0, 0))
+
+    def __random_behavior(self):
+        if self.__time <= 0 and self.__active:
+            self.__active = False
+            self.__set_the_time(1400, 1800)
+            self.__set_polygon()
+
+        if self.__time <= 0 and not self.__active:
+            self.__active = True
+            self.__set_the_time(200, 400)
+            self.__set_polygon()
+
+        self.__time -= 1
+
+    def into_energy(self, rect) -> bool:
+        if self.__active:
+            return self.__rect_energy.colliderect(rect)
+        return False
 
     def run(self):
         self.__screen.blit(self.__image, self.__position)
+        self.__random_behavior()
+        self.__draw()
