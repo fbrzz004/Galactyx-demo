@@ -24,8 +24,7 @@ class Weapon:
             manager_bullet.add_bullet(
                 Bullet(screen_instance=self.__screen,
                        x_muzzle=self.__x_muzzle(self.__spacecraft_rect),
-                       y_muzzle=self.__spacecraft_rect.y + 30,
-                       energy=energy)
+                       y_muzzle=self.__spacecraft_rect.y - 170)
             )
             self.__amount_energy -= energy
 
