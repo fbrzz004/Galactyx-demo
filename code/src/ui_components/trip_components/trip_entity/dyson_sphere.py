@@ -1,9 +1,8 @@
-from pygame import Color, Surface, SRCALPHA
+from pygame import Color
 from pygame.image import load as load_image
 from pygame.transform import scale
 from pygame.draw import polygon
 from random import randint
-from itertools import permutations
 
 class DysonSphere:
     def __init__(self, screen_instance):
@@ -83,4 +82,4 @@ def is_there_a_collision(points1: list, rect) -> bool:
     return False
 
 def get_rect(x1, y1, x2, y2):
-    return lambda x: (y2 - y1) * (x - x1) / (x2 - x1) + y1
+    return lambda x: (y2 - y1) * (x - x1) / (x2 - x1) + y1 if x2 != x1 else 0
