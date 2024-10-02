@@ -24,7 +24,7 @@ class DysonSphere:
 
         self.__rect_energy = None
 
-        self.__transparent_surface = Surface(self.__screen_rect.size, SRCALPHA)
+        self.__transparent_surface = None
 
 
     def __set_the_time(self, a, b):
@@ -40,22 +40,17 @@ class DysonSphere:
 
     def __draw(self):
         if self.__active:
-
-            self.__rect_energy = polygon(surface=self.__transparent_surface,
-                    color=self.__color,
-                    points=self.__points)
-
-            self.__screen.blit(self.__transparent_surface, (0, 0))
+            polygon(surface=self.__screen, color=self.__color, points=self.__points)
 
     def __random_behavior(self):
         if self.__time <= 0 and self.__active:
             self.__active = False
-            self.__set_the_time(1400, 1800)
+            self.__set_the_time(900, 1200)
             self.__set_polygon()
 
         if self.__time <= 0 and not self.__active:
             self.__active = True
-            self.__set_the_time(200, 400)
+            self.__set_the_time(200, 500)
             self.__set_polygon()
 
         self.__time -= 1
