@@ -16,27 +16,30 @@ class Trip(AbstractState):
         self.__game_trip_sub_state.draw()
 
 
-    def handle_events(self, event, machine_observer):
+    def handle_events(self, events, machine_observer):
 
-        state = self.__game_trip_sub_state.handle_events(event)
-        
-        if state == 'Exit':
-            machine_observer.exit = True
-            self._exit = True
-            
-        if state == 'Again':
-            del self.__game_trip_sub_state
-            self.__game_trip_sub_state = GameTrip(self.__screen)
-            
-        if state == 'Jump':
-            del self.__game_trip_sub_state
-            self.__game_trip_sub_state = JumpTrip(self.__screen)
+            for event in events:
+                self.__game_trip_sub_state.handle_events(event)
 
-        if state == 'game_over':
-            del self.__game_trip_sub_state
-            self.__game_trip_sub_state = GameOverTrip(self.__screen)
+            state = self.__game_trip_sub_state.return_next_sub_state()
 
-        if state == 'Home':
-            self._exit = True
-            machine_observer.ui_class = 'home'
+            if state == 'Exit':
+                machine_observer.exit = True
+                self._exit = True
+
+            if state == 'Again':
+                del self.__game_trip_sub_state
+                self.__game_trip_sub_state = GameTrip(self.__screen)
+
+            if state == 'Jump':
+                del self.__game_trip_sub_state
+                self.__game_trip_sub_state = JumpTrip(self.__screen)
+
+            if state == 'game_over':
+                del self.__game_trip_sub_state
+                self.__game_trip_sub_state = GameOverTrip(self.__screen)
+
+            if state == 'Home':
+                self._exit = True
+                machine_observer.ui_class = 'home'
             
