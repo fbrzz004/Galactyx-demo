@@ -42,14 +42,16 @@ class AbstractState(ABC):
             # drawing zone
             self.draw()
 
+            events = get_event()
+
             # manage the events queue
-            for event in get_event():
+            for event in events:
                 if event.type == QUIT:
                     self._exit = True
                     machine_observer.exit = True
-                else:
-                    # manage other events
-                    self.handle_events(event, machine_observer)
+
+            # manage other events
+            self.handle_events(events, machine_observer)
 
             # update the interface
             ui_update()
@@ -59,5 +61,5 @@ class AbstractState(ABC):
         pass
 
     @abstractmethod
-    def handle_events(self, event, machine_observer):
+    def handle_events(self, events, machine_observer):
         pass
