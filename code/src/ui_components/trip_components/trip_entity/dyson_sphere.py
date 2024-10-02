@@ -3,7 +3,7 @@ from pygame.image import load as load_image
 from pygame.transform import scale
 from pygame.draw import polygon
 from random import randint
-
+from itertools import permutations
 
 class DysonSphere:
     def __init__(self, screen_instance):
@@ -62,10 +62,30 @@ class DysonSphere:
 
     def into_energy(self, rect) -> bool:
         if self.__active:
-            return self.__rect_energy.colliderect(rect)
+            return is_there_a_collision(points1=self.__points, rect=rect)
         return False
 
     def run(self):
         self.__screen.blit(self.__image, self.__position)
         self.__random_behavior()
         self.__draw()
+
+
+def is_there_a_collision(points1: list, rect) -> bool:
+    points2 = [
+        [rect.x, rect.y],
+        [rect.x + rect.width, rect.y],
+        [rect.x + rect.width, rect.y + rect.height],
+        [rect.x, rect.y + rect.height],
+    ]
+
+    rect1 = get_rect(*points1[0], *points1[2])
+    rect2 = get_rect(*points1[1], *points1[3])
+
+    for point in points2:
+        if (rect1(point[0]) - point[1]) * (rect2(point[0]) - point[1]) <= 0:
+            return True
+    return False
+
+def get_rect(x1, y1, x2, y2):
+    return lambda x: (y2 - y1) * (x - x1) / (x2 - x1) + y1
