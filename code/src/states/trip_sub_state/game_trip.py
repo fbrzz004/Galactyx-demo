@@ -1,5 +1,5 @@
 from src.ui_components.trip_components.trip_background.star_background import StarBackground
-from src.ui_components.trip_components.trip_entity.enemy import Enemy
+from ...ui_components.trip_components.trip_entity.enemy.enemy import Enemy
 from src.ui_components.trip_components.trip_entity.group_asteroid import GroupAsteroid
 from src.ui_components.trip_components.trip_entity.dyson_sphere import DysonSphere
 from src.ui_components.trip_components.trip_entity.spacecraft.spacecraft import Spacecraft
@@ -24,11 +24,7 @@ class GameTrip:
 
         self.__group_asteroid = GroupAsteroid(
             screen_instance=screen_instance,
-            amount_asteroids=30
-        )
-
-        self.__enemy = Enemy(
-            screen_instance=screen_instance
+            amount_asteroids=10
         )
 
         self.__player_spacecraft = Spacecraft(
@@ -36,14 +32,20 @@ class GameTrip:
             get_energy = self.__dyson_sphere.into_energy
         )
 
-        # this obj manage the bullet spacecraft's weapon
-        self.__manager_bullet = ManagerBullet()
-
         # this obj manage the spacecraft collision
         self.__manager_spacecraft_collision = SpacecraftCollisionManager(
             spacecraft_rect=self.__player_spacecraft.get_rect(),
             get_energy=self.__dyson_sphere.into_energy
         )
+
+        self.__enemy = Enemy(
+            screen_instance=screen_instance,
+            rect_player=self.__player_spacecraft.get_rect(),
+            kill_player=self.__manager_spacecraft_collision.minus_live_shoot
+        )
+
+        # this obj manage the bullet spacecraft's weapon
+        self.__manager_bullet = ManagerBullet(screen_width=screen_instance.get_rect().width)
 
         # hud implementation
         self.__energy_weapon_hud = EnergyHud(screen_instance=screen_instance,
@@ -75,6 +77,7 @@ class GameTrip:
 
         # draw the enemy
         self.__enemy.run()
+        self.__enemy.shooting_by_player(bullets=self.__manager_bullet.get_bullets())
 
         # draw the spacecraft
         self.__player_spacecraft.run()
@@ -96,7 +99,6 @@ class GameTrip:
 
     def handle_events(self, event):
         self.__player_spacecraft.handler(event, manager_bullet=self.__manager_bullet)
-
 
         state = None
 
