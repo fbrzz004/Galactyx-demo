@@ -24,7 +24,7 @@ class GameTrip:
 
         self.__group_asteroid = GroupAsteroid(
             screen_instance=screen_instance,
-            amount_asteroids=3
+            amount_asteroids=30
         )
 
         self.__enemy = Enemy(
@@ -45,9 +45,17 @@ class GameTrip:
             get_energy=self.__dyson_sphere.into_energy
         )
 
-        # hud implementation+
+        # hud implementation
         self.__energy_weapon_hud = EnergyHud(screen_instance=screen_instance,
-                                         get_current_level=self.__player_spacecraft.get_energy_weapon)
+                                             get_current_level=self.__player_spacecraft.get_energy_weapon,
+                                             left=10, bottom=screen_instance.get_rect().height - 10,
+                                             title="Energy Weapon")
+
+        # hud implementation
+        self.__energy_life = EnergyHud(screen_instance=screen_instance,
+                                       get_current_level=self.__manager_spacecraft_collision.get_live,
+                                       right=screen_instance.get_rect().width - 10, bottom=screen_instance.get_rect().height - 10,
+                                       title="Energy Life")
 
     def __verify_collision_bullet_with_other_objet(self):
         self.__manager_bullet.is_collision(self.__group_asteroid.get_rect_callable_collision())
@@ -74,14 +82,21 @@ class GameTrip:
         # run the manager of bullet
         self.__manager_bullet.run()
 
+        # run the spacecraft-collision
+        self.__manager_spacecraft_collision.run()
+
         # hud section
         # hud energy weapon
         self.__energy_weapon_hud.run()
+        # hud energy life
+        self.__energy_life.run()
+
+        self.__verify_collision_bullet_with_other_objet()
+        self.__verify_collision_spacecraft_to_asteroids()
 
     def handle_events(self, event):
         self.__player_spacecraft.handler(event, manager_bullet=self.__manager_bullet)
-        self.__verify_collision_bullet_with_other_objet()
-        self.__verify_collision_spacecraft_to_asteroids()
+
 
         state = None
 
