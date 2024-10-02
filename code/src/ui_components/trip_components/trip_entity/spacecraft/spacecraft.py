@@ -9,7 +9,7 @@ from .weapon import Weapon
 
 
 class Spacecraft:
-    def __init__(self, screen_instance, get_energy):
+    def __init__(self, screen_instance, get_energy=None, static=False):
         # screen
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
@@ -20,6 +20,10 @@ class Spacecraft:
         self.__image = scale(self.__image, (self.__image.get_rect().width * self.__standard_size_factor,
                                             self.__image.get_rect().height * self.__standard_size_factor))
         self.__image_rect = self.__image.get_rect()
+        self.__image_rect.x = (self.__screen_rect.width - self.__image_rect.width) / 2
+
+        # mode
+        self.__static = static
 
         # initial position config
         self.__image_rect.y = self.__screen_rect.height - self.__image_rect.height - 150
@@ -34,18 +38,19 @@ class Spacecraft:
             image_rect=self.__image_rect
         )
 
-        # directional jet
-        self.__directional_jet = DirectionalJet(
-            screen_instance=screen_instance,
-            image_rect=self.__image_rect
-        )
+        if not static:
+            # directional jet
+            self.__directional_jet = DirectionalJet(
+                screen_instance=screen_instance,
+                image_rect=self.__image_rect
+            )
 
-        # weapon
-        self.__weapon = Weapon(
-            screen_instance=screen_instance,
-            spacecraft_rect=self.__image_rect,
-            get_energy=get_energy
-        )
+            # weapon
+            self.__weapon = Weapon(
+                screen_instance=screen_instance,
+                spacecraft_rect=self.__image_rect,
+                get_energy=get_energy
+            )
 
     def handler(self, event, manager_bullet):
         if event.type == KEYDOWN:
@@ -107,6 +112,8 @@ class Spacecraft:
 
     def run(self):
         self.__propulsion_up()
-        self.__move()
+        if not self.__static:
+            self.__move()
+            self.__weapon.auto_get_energy()
+
         self.__screen.blit(self.__image, self.__image_rect)
-        self.__weapon.auto_get_energy()
