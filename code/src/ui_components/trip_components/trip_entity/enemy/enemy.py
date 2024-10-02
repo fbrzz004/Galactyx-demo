@@ -61,14 +61,15 @@ class Enemy:
         self.__manager_bullet.is_collision_only_one(self.__rect_player, self.__kill_player)
 
     def __auto_behavior(self):
-        factor = (self.__rect_player.x - self.__image_rect.x) / abs((self.__rect_player.x - self.__image_rect.x)) if (self.__rect_player.x - self.__image_rect.x) else 0
+        factor = (self.__rect_player.x - self.__image_rect.x) / abs(self.__rect_player.x - self.__image_rect.x) if (self.__rect_player.x - self.__image_rect.x) else 0
         self.__image_rect.x += uniform(self.__min_x_velocity, self.__max_x_velocity) * factor
         self.__update_x_rect_energy()
 
     def __auto_shoot(self):
-        if (self.__rect_player.x < self.__image_rect.x < self.__rect_player.x + self.__rect_player.width or
-            self.__image_rect.x < self.__rect_player.x < self.__image_rect.x + self.__rect_player.width):
+        if (self.__rect_player.x <= self.__image_rect.x <= self.__rect_player.x + self.__rect_player.width or
+            self.__image_rect.x <= self.__rect_player.x <= self.__image_rect.x + self.__image_rect.width):
             self.__weapon.shoot(self.__manager_bullet)
+
 
     def shooting_by_player(self, bullets: list):
         if self.__image_rect.y == self.__image_rect_y:
