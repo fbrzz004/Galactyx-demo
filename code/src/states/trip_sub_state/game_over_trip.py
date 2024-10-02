@@ -22,11 +22,16 @@ class GameOverTrip:
             labels_button_color='Black'
         )
 
+        self.__next_sub_state = None
+
     def draw(self):
         self.__background_start.draw()
         self.__buttons.draw(self.__screen)
 
     def handle_events(self, event):
-        return self.__buttons.handle_events()
+        self.__next_sub_state = self.__buttons.handle_events()
+
+    def return_next_sub_state(self):
+        return self.__next_sub_state
 
 
