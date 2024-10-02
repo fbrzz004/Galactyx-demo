@@ -4,6 +4,7 @@ class SpacecraftCollisionManager:
     def __init__(self, spacecraft_rect, get_energy):
 
         self.__live = 100
+        self.__max_live = 100
         self.__spacecraft_rect = spacecraft_rect
         self.__calculate_damage = lambda w, h: w * h * 0.0004
 
@@ -18,12 +19,14 @@ class SpacecraftCollisionManager:
                 set_collision_rect()
 
     def get_live(self):
-        if self.__live < 0: self.__live = 0
-        return self.__live
+        def a():
+            if self.__live < 0: self.__live = 0
+            return self.__live, self.__max_live
+        return a
 
     def is_live(self):
         return True if self.__live > 0 else False
 
     def run(self):
         if self.__get_energy(self.__spacecraft_rect) and self.__live < 100:
-            self.__live += 0.01
+            self.__live += 0.1
