@@ -1,4 +1,3 @@
-from functools import singledispatch
 
 class SpacecraftCollisionManager:
     def __init__(self, spacecraft_rect, get_energy):
@@ -10,12 +9,17 @@ class SpacecraftCollisionManager:
 
         self.__get_energy=get_energy
 
-    @singledispatch
+    def minus_live(self, rect_of_collision):
+        self.__live -= self.__calculate_damage(rect_of_collision.width,
+                                               rect_of_collision.height)
+
+    def minus_live_shoot(self):
+        self.__live -= 2
+
     def is_collision(self, list_rect_of_collisions):
         for rect_of_collision, set_collision_rect in list_rect_of_collisions:
             if self.__spacecraft_rect.colliderect(rect_of_collision):
-                self.__live -= self.__calculate_damage(rect_of_collision.width,
-                                                       rect_of_collision.height)
+                self.minus_live(rect_of_collision)
                 set_collision_rect()
 
     def get_live(self):
