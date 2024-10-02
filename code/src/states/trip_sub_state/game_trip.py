@@ -7,6 +7,7 @@ from src.ui_components.trip_components.trip_entity.spacecraft.spacecraft import 
 from ...ui_components.trip_components.trip_entity.spacecraft.bullet.manager_bullet import ManagerBullet
 from ...ui_components.trip_components.trip_entity.spacecraft.spacecraft_collision_manager import \
     SpacecraftCollisionManager
+from ...ui_components.trip_components.trip_entity.wormhole_detector.wormhole_detector import WormHoleDetector
 from ...ui_components.trip_components.trip_hud.energy_hud import EnergyHud
 
 
@@ -24,7 +25,7 @@ class GameTrip:
 
         self.__group_asteroid = GroupAsteroid(
             screen_instance=screen_instance,
-            amount_asteroids=10
+            amount_asteroids=6
         )
 
         self.__player_spacecraft = Spacecraft(
@@ -58,6 +59,14 @@ class GameTrip:
                                        get_current_level=self.__manager_spacecraft_collision.get_live,
                                        right=screen_instance.get_rect().width - 10, bottom=screen_instance.get_rect().height - 10,
                                        title="Energy Life")
+
+        # detector to jump
+        self.__jump_detector = WormHoleDetector(
+            screen_instance=screen_instance,
+            get_energy_spacecraft=self.__manager_spacecraft_collision.get_live
+        )
+
+        self.__next_sub_state = None
 
     def __verify_collision_bullet_with_other_objet(self):
         self.__manager_bullet.is_collision(self.__group_asteroid.get_rect_callable_collision())
@@ -97,14 +106,18 @@ class GameTrip:
         self.__verify_collision_bullet_with_other_objet()
         self.__verify_collision_spacecraft_to_asteroids()
 
+        # detector to jump
+        self.__jump_detector.run()
+
     def handle_events(self, event):
         self.__player_spacecraft.handler(event, manager_bullet=self.__manager_bullet)
 
-        state = None
+        if self.__jump_detector.handler(event) and not self.__next_sub_state:
+            self.__next_sub_state = 'Jump'
 
+    def return_next_sub_state(self):
         if not self.__manager_spacecraft_collision.is_live():
-            state = 'game_over'
+            self.__next_sub_state = 'game_over'
 
-        return state
-
+        return self.__next_sub_state
 
