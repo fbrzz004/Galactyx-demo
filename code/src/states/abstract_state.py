@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+import pygame.time
 from pygame.display import flip as ui_update
 from pygame.event import get as get_event
 from pygame import QUIT
@@ -12,6 +12,7 @@ class AbstractState(ABC):
                  background_color = None,
                  path_image_background = None,
                  background_opacity = 255):
+                 #fps=60): add FPS parameter)
 
         # screen instance
         self._screen = screen_instance
@@ -31,7 +32,13 @@ class AbstractState(ABC):
         # flag for exit of ui loop
         self._exit = False
 
+        # Clock and FPS
+        #self.clock = pygame.time.Clock()
+        #self.fps = fps
+        
+        self.machine_observer = None  # Initialize machine_observer
     def run(self, machine_observer):
+        self.machine_observer = machine_observer  # Keep machine_observer
         # man loop for this interface
         while not self._exit:
             # fill the screen with a color
@@ -55,6 +62,11 @@ class AbstractState(ABC):
 
             # update the interface
             ui_update()
+            # update the interface
+            #pygame.display.flip()
+
+            # Control FPS
+            #self.clock.tick(self.fps)
 
     @abstractmethod
     def draw(self):
