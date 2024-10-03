@@ -10,5 +10,13 @@ class GroupAsteroid:
         for asteroid in self.__asteroids_object:
             asteroid.run()
 
+    def get_rect_callable_collision(self):
+        rect_callable = []
+
+        for asteroid in self.__asteroids_object:
+            rect_callable.append([asteroid.get_rect(), asteroid.destroyed])
+
+        return rect_callable
+
     def run(self):
         self.__run_asteroids()
