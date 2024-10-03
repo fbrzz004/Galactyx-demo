@@ -47,7 +47,7 @@ class Asteroid(Destroyable):
 
     def __random_initial_velocity(self):
         self.__velocity_x = uniform(-1, 1)
-        self.__velocity_y = uniform(1, 4)
+        self.__velocity_y = uniform(1, 8)
 
     def __moving(self):
         if self.__image_rect.y > self.__screen_rect.height + 5 or self._get_destroyed():
