@@ -12,11 +12,12 @@ from ...ui_components.trip_components.trip_hud.energy_hud import EnergyHud
 
 
 class GameTrip:
-    def __init__(self, screen_instance):
+    def __init__(self, screen_instance, get_level_jump):
 
         # background
         self.__star_background = StarBackground(
-            screen_instance=screen_instance
+            screen_instance=screen_instance,
+            get_level_jump=get_level_jump
         )
 
         self.__dyson_sphere = DysonSphere(
