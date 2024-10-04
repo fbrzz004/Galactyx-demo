@@ -1,11 +1,15 @@
 from src.states.abstract_state import AbstractState
 from src.ui_components.button.text_button import TextButton
+from pathlib import Path
 
 
 class End(AbstractState):
     def __init__(self, screen_instance):
+
+        self.__background_path = Path('assets/images/ui/background/background_image_end.png')
+
         AbstractState.__init__(self, screen_instance=screen_instance,
-                               path_image_background="assets\\images\\ui\\background\\background_image_end.png")
+                               path_image_background=str(self.__background_path))
 
         # only test
         self.__button_menu = TextButton(

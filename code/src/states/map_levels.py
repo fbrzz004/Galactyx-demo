@@ -5,12 +5,14 @@ from src.ui_components.button.image_button import ImageButton
 
 class MapLevels(AbstractState):
     def __init__(self, screen_instance):
-        path_image_background = Path("assets/images/ui/background/background_image_map.png")
-        path_image_andromeda = Path("assets/images/galaxies/galaxy-andromeda.png")
-        path_image_triangulum = Path("assets/images/galaxies/galaxy-triangulum.png")
-        path_image_pegasus = Path("assets/images/galaxies/galaxy - pegasus.png")
-        path_image_phoenix = Path("assets/images/galaxies/galaxy - phoenix.png")
-        path_image_sculptor = Path("assets/images/galaxies/galaxy - sculptor.png")
+        self.__parent_path_resources = Path('assets/images/galaxies')
+
+        path_image_background = self.__parent_path_resources.parent / 'ui' / 'background_image_map.png'
+        path_image_andromeda = self.__parent_path_resources / 'galaxy-andromeda.png'
+        path_image_triangulum = self.__parent_path_resources / 'galaxy-triangulum.png'
+        path_image_pegasus = self.__parent_path_resources / 'galaxy-pegasus.png'
+        path_image_phoenix = self.__parent_path_resources / 'galaxy-phoenix.png'
+        path_image_sculptor = self.__parent_path_resources / 'galaxy-sculptor.png'
 
         super().__init__(
             screen_instance=screen_instance,

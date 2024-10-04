@@ -1,6 +1,7 @@
 # cinematic_spacecraft.py
 from pygame.image import load as load_image
 from pygame.transform import scale, rotate
+from pathlib import Path
 
 class CinematicSpacecraft:
     def __init__(self, screen_instance):
@@ -10,7 +11,7 @@ class CinematicSpacecraft:
 
         # scale image
         self.__standard_size_factor = 1/7
-        self.__original_image = load_image("assets/images/player/player_spaceship.png").convert_alpha()
+        self.__original_image = load_image(Path("assets/images/player/player_spaceship.png")).convert_alpha()
 
         # rotate image
         self.__rotated_image = rotate(self.__original_image, -60)

@@ -8,6 +8,7 @@ from pygame import (KEYDOWN,
 from pygame.image import load as load_image
 from pygame.transform import scale
 
+from pathlib import Path
 
 class Spacecraft:
     def __init__(self, screen_instance):
@@ -17,7 +18,7 @@ class Spacecraft:
 
         # player image
         self.__standard_size_factor = 1/5
-        self.__image = load_image("assets\\images\\player\\player_spaceship.png")
+        self.__image = load_image(Path("assets/images/player/player_spaceship.png"))
         self.__image = scale(self.__image, (self.__image.get_rect().width * self.__standard_size_factor,
                                             self.__image.get_rect().height * self.__standard_size_factor))
         self.__image_rect = self.__image.get_rect()
