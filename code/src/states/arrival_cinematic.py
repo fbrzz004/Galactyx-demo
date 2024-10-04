@@ -1,8 +1,9 @@
-import pygame
+from pygame.time import get_ticks
 from src.states.abstract_state import AbstractState
 from src.ui_components.button.text_button import TextButton
 from src.ui_components.trip_components.trip_entity.galaxy import Galaxy
 from src.ui_components.trip_components.trip_entity.cinematic_spacecraft import CinematicSpacecraft
+
 
 class ArrivalCinematic(AbstractState):
     def __init__(self, screen_instance, galaxy_image_path="assets/images/galaxies/galaxy-andromeda.png"):
@@ -24,7 +25,7 @@ class ArrivalCinematic(AbstractState):
         )
 
         # Initialize the start time
-        self.start_time = pygame.time.get_ticks() 
+        self.start_time = get_ticks()
     def draw(self):
         if self._image_background:
             self._screen.blit(self._image_background, (0, 0))
@@ -48,7 +49,7 @@ class ArrivalCinematic(AbstractState):
             self.machine_observer.ui_class = 'end'
 
     def check_timer(self):
-        current_time = pygame.time.get_ticks()
+        current_time = get_ticks()
         if current_time - self.start_time > 8000:  # 8 seconds
             self._exit = True
             self.machine_observer.ui_class = 'end'
