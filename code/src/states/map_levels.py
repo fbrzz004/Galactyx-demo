@@ -7,12 +7,12 @@ class MapLevels(AbstractState):
     def __init__(self, screen_instance):
         self.__parent_path_resources = Path('assets/images/galaxies')
 
-        path_image_background = self.__parent_path_resources.parent / 'ui' / 'background_image_map.png'
+        path_image_background = self.__parent_path_resources.parent / 'ui' / 'background' / 'background_image_map.png'
         path_image_andromeda = self.__parent_path_resources / 'galaxy-andromeda.png'
         path_image_triangulum = self.__parent_path_resources / 'galaxy-triangulum.png'
-        path_image_pegasus = self.__parent_path_resources / 'galaxy-pegasus.png'
-        path_image_phoenix = self.__parent_path_resources / 'galaxy-phoenix.png'
-        path_image_sculptor = self.__parent_path_resources / 'galaxy-sculptor.png'
+        path_image_pegasus = self.__parent_path_resources / 'galaxy - pegasus.png'
+        path_image_phoenix = self.__parent_path_resources / 'galaxy - phoenix.png'
+        path_image_sculptor = self.__parent_path_resources / 'galaxy - sculptor.png'
 
         super().__init__(
             screen_instance=screen_instance,
