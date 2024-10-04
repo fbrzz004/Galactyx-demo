@@ -7,7 +7,7 @@ from pygame.transform import scale
 
 
 class StarBackground:
-    def __init__(self, screen_instance, get_level_jump):
+    def __init__(self, screen_instance, get_level_jump=None):
         # screen
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
@@ -26,8 +26,9 @@ class StarBackground:
         self.__get_level_jump = get_level_jump
 
         # path for image folder
-        self.__directory_path = Path('assets') / 'images' / 'ui' / 'background'
-        self.__load_background()
+        if self.__get_level_jump is not None:
+            self.__directory_path = Path('assets') / 'images' / 'ui' / 'background'
+            self.__load_background()
 
     def __load_star(self):
         self.__star_attributes = [] # (position, velocity, radio)
@@ -71,6 +72,7 @@ class StarBackground:
                 self.__star_attributes[index][0] = [randint(int(radio), int(self.__screen_rect.width - radio)), -radio]
 
     def draw(self):
-        self.__screen.blit(self.__background_image, (0, 0))
+        if self.__get_level_jump is not None:
+            self.__screen.blit(self.__background_image, (0, 0))
         self.__draw_stars()
         self.__update_positions_star()
