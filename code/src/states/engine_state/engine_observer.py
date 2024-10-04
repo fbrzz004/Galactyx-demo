@@ -3,7 +3,7 @@ from src.states.engine_state.states import navigation
 class EngineObserver:
     def __init__(self):
         self.__exit = False
-        self.__ui_class = navigation['origin_cinematic']
+        self.__ui_class = navigation['home']
 
     @property
     def exit(self) -> bool:

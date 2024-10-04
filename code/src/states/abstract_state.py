@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import pygame.time
 from pygame.display import flip as ui_update
 from pygame.event import get as get_event
 from pygame import QUIT
