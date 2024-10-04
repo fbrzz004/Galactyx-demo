@@ -6,6 +6,8 @@ from random import randint
 
 from pathlib import Path
 
+from ....fix_file_paths_compiler import resource_path
+
 class DysonSphere:
     def __init__(self, screen_instance):
 
@@ -13,7 +15,7 @@ class DysonSphere:
         self.__size = (300, 300)
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
-        self.__image = load_image(Path('assets/images/dyson_sphere/dyson_sphere.png'))
+        self.__image = load_image(resource_path(str(Path('assets/images/dyson_sphere/dyson_sphere.png'))))
         self.__image = scale(self.__image, self.__size)
 
         self.__color = Color(255, 223, 0, 128)

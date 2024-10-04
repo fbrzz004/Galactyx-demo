@@ -6,6 +6,8 @@ from pygame import QUIT
 from pygame import image
 from pygame.transform import scale
 
+from ..fix_file_paths_compiler import resource_path
+
 class AbstractState(ABC):
     def __init__(self, screen_instance,
                  background_color = None,
@@ -23,7 +25,7 @@ class AbstractState(ABC):
 
         if path_image_background:
             self._image_background = scale(
-                surface=image.load(path_image_background),
+                surface=image.load(resource_path(path_image_background)),
                 size=self._screen_rect.size
             )
             self._image_background.set_alpha(background_opacity)

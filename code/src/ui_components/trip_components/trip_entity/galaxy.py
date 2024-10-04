@@ -1,6 +1,8 @@
 # galaxy.py
 from pygame.image import load as load_image
-from pygame.transform import scale, rotate
+from pygame.transform import scale
+
+from ....fix_file_paths_compiler import resource_path
 
 class Galaxy:
     def __init__(self, screen_instance, galaxy_image_path):
@@ -8,7 +10,7 @@ class Galaxy:
         self.__screen_rect = screen_instance.get_rect()
 
         # Load the original galaxy image
-        self.__original_image = load_image(galaxy_image_path).convert_alpha()
+        self.__original_image = load_image(resource_path(str(galaxy_image_path))).convert_alpha()
         
         # Initial size configuration
         self.__initial_size = (300, 300)  # Initial size

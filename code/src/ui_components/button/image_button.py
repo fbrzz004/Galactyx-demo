@@ -2,6 +2,8 @@ from pygame.transform import scale
 from src.ui_components.button.abstract_button import AbstractButton
 from pygame.image import load as load_image
 
+from ...fix_file_paths_compiler import resource_path
+
 class ImageButton(AbstractButton):
     def __init__(self,
                  position: list[float] | tuple[float, float],
@@ -16,7 +18,7 @@ class ImageButton(AbstractButton):
                                 scale_on_top_of=True)
 
         # original and scaled image
-        self.__image = self.__original_image = scale(load_image(path_image).convert_alpha(), dimension)
+        self.__image = self.__original_image = scale(load_image(resource_path(path_image)).convert_alpha(), dimension)
         self.__scaled_image = None
 
         # flag to manage the one pressed on unpressed actions
@@ -24,7 +26,7 @@ class ImageButton(AbstractButton):
         self.__un_scaled = True
 
     def _on_pressed(self):
-        print(self._label)
+        pass
 
     def _on_top_of(self):
         if self.__scaled:

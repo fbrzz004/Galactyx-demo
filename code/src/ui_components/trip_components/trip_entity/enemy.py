@@ -8,12 +8,15 @@ from pygame.mouse import get_pos
 
 from pathlib import Path
 
+from ....fix_file_paths_compiler import resource_path
+
+
 class Enemy:
     def __init__(self, screen_instance):
         self.__screen = screen_instance
         self.__screen_rect = screen_instance.get_rect()
 
-        self.__image = rotate(surface=load_image(Path("assets/images/enemy/enemy.png")),
+        self.__image = rotate(surface=load_image(resource_path(str(Path("assets/images/enemy/enemy.png")))),
                               angle=180)
 
         self.__standard_scale_factor = 1/6

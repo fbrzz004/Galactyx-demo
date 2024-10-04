@@ -5,6 +5,8 @@ from pygame.image import load as load_image
 from pathlib import Path
 from pygame.transform import scale
 
+from ....fix_file_paths_compiler import resource_path
+
 
 class StarBackground:
     def __init__(self, screen_instance, get_level_jump=None):
@@ -48,8 +50,8 @@ class StarBackground:
             ])
 
     def __load_background(self):
-        self.__background_image = scale(load_image(self.__directory_path /
-                                              f'background_game_trip_{self.__get_level_jump()}.png'), self.__screen_rect.size)
+        self.__background_image = scale(load_image(resource_path(str(self.__directory_path /
+                                              f'background_game_trip_{self.__get_level_jump()}.png'))), self.__screen_rect.size)
 
     def __draw_stars(self):
         for position, velocity, radio in self.__star_attributes:

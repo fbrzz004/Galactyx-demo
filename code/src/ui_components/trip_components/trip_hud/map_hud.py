@@ -4,6 +4,8 @@ from pygame.image import load as load_image
 from pygame.transform import scale
 from pathlib import Path
 
+from ....fix_file_paths_compiler import resource_path
+
 
 class MapHud:
     def __init__(self, screen_instance):
@@ -49,7 +51,7 @@ class MapHud:
 
     def __load_image(self):
         factor = .25
-        self.__icon_wormhole = load_image(Path('assets') / 'images' / 'wormhole' / 'icon_wormhole_hud.png')
+        self.__icon_wormhole = load_image(resource_path(str(Path('assets') / 'images' / 'wormhole' / 'icon_wormhole_hud.png')))
         self.__icon_wormhole_rect = self.__icon_wormhole.get_rect()
         self.__icon_wormhole = scale(self.__icon_wormhole,
                                      (self.__icon_wormhole_rect.width * factor,
@@ -57,14 +59,14 @@ class MapHud:
         self.__icon_wormhole_rect = self.__icon_wormhole.get_rect()
 
         factor = .1
-        self.__icon_galaxy = load_image(Path('assets') / 'images' / 'galaxies' / 'galaxy-andromeda.png')
+        self.__icon_galaxy = load_image(resource_path(str(Path('assets') / 'images' / 'galaxies' / 'galaxy-andromeda.png')))
         self.__icon_galaxy_rect = self.__icon_galaxy.get_rect()
         self.__icon_galaxy = scale(self.__icon_galaxy, (self.__icon_galaxy_rect.width * factor,
                                                         self.__icon_galaxy_rect.height * factor))
         self.__icon_galaxy_rect = self.__icon_galaxy.get_rect()
 
         factor = .5
-        self.__icon_spacecraft = load_image(Path('assets') / 'images' / 'player' / 'spacecraft_icon.png')
+        self.__icon_spacecraft = load_image(resource_path(str(Path('assets') / 'images' / 'player' / 'spacecraft_icon.png')))
         self.__icon_spacecraft_rect = self.__icon_galaxy.get_rect()
         self.__icon_spacecraft = scale(self.__icon_spacecraft, (self.__icon_spacecraft_rect.width * factor,
                                                         self.__icon_spacecraft_rect.height * factor))

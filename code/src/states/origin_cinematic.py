@@ -5,11 +5,14 @@ from pathlib import Path
 from pygame.surfarray import make_surface
 from pygame.transform import scale
 
+from ..fix_file_paths_compiler import resource_path
+
+
 class OriginCinematic(AbstractState):
     def __init__(self, screen_instance):
         AbstractState.__init__(self, screen_instance=screen_instance)
 
-        self.__video = VideoFileClip(str(Path('assets') / 'video_cinematica_origin' / 'cinematic_video.mp4'))
+        self.__video = VideoFileClip(str(resource_path(str(Path('assets') / 'video_cinematica_origin' / 'cinematic_video.mp4'))))
         self.__frames = self.__video.iter_frames(fps=60, dtype='uint8')
         self.__video_is_end = False
 

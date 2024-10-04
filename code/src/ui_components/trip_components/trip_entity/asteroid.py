@@ -7,6 +7,8 @@ from src.ui_components.trip_components.trip_entity.destroyable import Destroyabl
 
 from pathlib import Path
 
+from ....fix_file_paths_compiler import resource_path
+
 class Asteroid(Destroyable):
     def __init__(self, screen_instance):
         Destroyable.__init__(self)
@@ -16,7 +18,7 @@ class Asteroid(Destroyable):
 
         # initial config image
         self.__standard_size_factor = 1/8
-        self.__image = load_image(Path("assets/images/asteroid/asteroid.png"))
+        self.__image = load_image(resource_path(str(Path("assets/images/asteroid/asteroid.png"))))
         self.__image = scale(self.__image, (self.__image.get_rect().width * self.__standard_size_factor,
                                             self.__image.get_rect().height * self.__standard_size_factor))
         self.__original_image = self.__image.copy()
