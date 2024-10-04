@@ -3,6 +3,11 @@ from pygame import (
     display
 )
 
+from pathlib import Path
+from pygame.image import load
+
+from .fix_file_paths_compiler import resource_path
+
 class Screen:
     def __init__(self,
                  size: tuple[int, int] | None = None,
@@ -13,7 +18,9 @@ class Screen:
         self.__screen = display.set_mode(size=size) if size else display.set_mode(flags=mode)
 
         self.__title = 'Galactyx'
-        self.__icon_title = None
+
+        self.__icon_title_path = resource_path(str(Path('assets') / 'images' / 'icon' / 'Galactyx Beta v0.1-icon.png'))
+        self.__icon_surface = load(str(self.__icon_title_path))
 
         # ---------------- initial methods execute ----------------
         self.__default()
@@ -21,6 +28,7 @@ class Screen:
     # ---------------- privates methods ----------------
     def __default(self):
         display.set_caption(title=self.__title)
+        display.set_icon(self.__icon_surface)
 
     # ---------------- public methods ----------------
     def get_screen(self):
